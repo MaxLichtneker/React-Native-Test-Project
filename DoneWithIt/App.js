@@ -1,12 +1,24 @@
 import { StyleSheet, Text, View,TouchableHighlight, SafeAreaView,Image, Button, Alert,Platform,StatusBar, Dimensions} from 'react-native';
+import{useDeviceOrientation} from '@react-native-community/hooks';
 
 export default function App() {
+
+  console.log(useDeviceOrientation());
 
   const handlePress = () => console.log("text pressed");
   const containerStyle = {backgroundColor: "orange"};
 
+  const{landscape} = useDeviceOrientation();
+
   return (
     <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          backgroundColor: "dodgerblue",
+          width: "50%",
+          height: landscape ? "100%" : "30%",
+        }}
+      ></View>
       <Text numberOfLines={1}>Hello world!</Text>
 
       <SafeAreaView>
@@ -25,16 +37,6 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         <Button title='Click me' 
         onPress={() => Alert.alert("My title","My Message",[{text: "Yes"}, {text: "No"},])}/>  
-      </SafeAreaView>
-
-      <SafeAreaView style={styles.container}>
-        <view
-          style={{
-            backgroundColor: "dodgerblue",
-            width: "50%",
-            height:"70",
-          }}
-        />
       </SafeAreaView>
 
       <StatusBar style="auto" />
